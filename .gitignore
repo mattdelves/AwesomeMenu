@@ -1,2 +1,4 @@
 */timeline.xctimeline
 **/*/xcuserdata
+.DS_store
+**/*/.DS_store
