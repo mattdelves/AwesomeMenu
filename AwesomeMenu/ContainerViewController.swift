@@ -12,6 +12,7 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
   
   public var visibleViewController:UIViewController!
   public var menuViewController:UIViewController!
+  public var overlayView:UIView!
   var menuTransitioningDelegate:MenuTransitioningDelegate?
   var enclosingScrollView:UIScrollView?
   var menuDragAffordanceView:DragAffordanceView?
@@ -19,7 +20,12 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
   override public func viewDidLoad() {
     super.viewDidLoad()
 
+    overlayView = UIView(frame: self.bounds)
+    overlayView.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.5)
+    overlayView.alpha = 0.0
+    
     menuTransitioningDelegate = MenuTransitioningDelegate()
+    menuTransitioningDelegate!.overlay = overlayView
     menuViewController!.transitioningDelegate = menuTransitioningDelegate
     menuViewController!.modalPresentationStyle = .Custom
     

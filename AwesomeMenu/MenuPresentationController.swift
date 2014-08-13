@@ -10,26 +10,21 @@ import UIKit
 
 class MenuPresentationController: UIPresentationController {
 
-  lazy var dimmingView :UIView = {
-    let view = UIView(frame: self.containerView!.bounds)
-    view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
-    view.alpha = 0.0
-    return view
-    }()
-  
+  public var overlay:UIView
+
   override func presentationTransitionWillBegin() {
 
-    dimmingView.frame = self.containerView.bounds
-    dimmingView.alpha = 0.0
+    overlay.frame = self.containerView.bounds
+    overlay.alpha = 0.0
 
-    containerView.insertSubview(dimmingView, atIndex: 0)
+    containerView.insertSubview(overlay, atIndex: 0)
     
     if let transitionCoordinator = presentedViewController.transitionCoordinator() {
       transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-        self.dimmingView.alpha  = 1.0
+        self.overlay.alpha  = 1.0
         }, completion:nil)
     } else {
-      dimmingView.alpha = 1.0
+      overlay.alpha = 1.0
     }
   }
   
@@ -37,10 +32,10 @@ class MenuPresentationController: UIPresentationController {
 
     if let transitionCoordinator = presentedViewController.transitionCoordinator() {
       transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-        self.dimmingView.alpha  = 0.0
+        self.overlay.alpha  = 0.0
         }, completion:nil)
     } else {
-      dimmingView.alpha = 0.0
+      overlay.alpha = 0.0
     }
   }
   
@@ -61,7 +56,7 @@ class MenuPresentationController: UIPresentationController {
   }
   
   override func containerViewWillLayoutSubviews() {
-    dimmingView.frame = containerView.bounds
+    overlay.frame = containerView.bounds
     presentedView().frame = frameOfPresentedViewInContainerView()
   }
 

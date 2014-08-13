@@ -10,8 +10,12 @@ import UIKit
 
 class MenuTransitioningDelegate: NSObject,  UIViewControllerTransitioningDelegate {
 
+  public var overlay:UIView
+  
   internal func presentationControllerForPresentedViewController(presented: UIViewController!, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController!) -> UIPresentationController! {
-    return MenuPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    let presentationController = MenuPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    presentationController!.overlay = overlay
+    return presentationController
   }
 
   internal func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
