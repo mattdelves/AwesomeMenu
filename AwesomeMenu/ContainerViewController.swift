@@ -1,6 +1,5 @@
 //
 //  ContainerViewController.swift
-//  KanjiHelper
 //
 //  Created by Matthew Delves on 27/07/2014.
 //  Copyright (c) 2014 Matthew Delves. All rights reserved.
@@ -19,24 +18,24 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
   
   override public func viewDidLoad() {
     super.viewDidLoad()
-
-    overlayView = UIView(frame: self.bounds)
-    overlayView.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.5)
-    overlayView.alpha = 0.0
-    
-    menuTransitioningDelegate = MenuTransitioningDelegate()
-    menuTransitioningDelegate!.overlay = overlayView
-    menuViewController!.transitioningDelegate = menuTransitioningDelegate
-    menuViewController!.modalPresentationStyle = .Custom
     
     enclosingScrollView = UIScrollView(frame: view.bounds)
     enclosingScrollView!.alwaysBounceHorizontal = true
     enclosingScrollView!.decelerationRate = UIScrollViewDecelerationRateFast
     enclosingScrollView!.delegate = self
-    view.addSubview(enclosingScrollView!)
     
     menuDragAffordanceView = DragAffordanceView(frame: CGRectMake(CGRectGetMaxX(enclosingScrollView!.bounds) + 10.0, CGRectGetMidY(enclosingScrollView!.bounds) - 25.0, 50.0, 50.0))
     enclosingScrollView!.addSubview(menuDragAffordanceView!)
+    view.addSubview(enclosingScrollView!)
+  }
+  
+  override public func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    menuTransitioningDelegate = MenuTransitioningDelegate()
+    menuTransitioningDelegate!.overlay = overlayView
+    menuViewController!.transitioningDelegate = menuTransitioningDelegate
+    menuViewController!.modalPresentationStyle = .Custom
     
     enclosingScrollView!.addSubview(visibleViewController!.view)
   }
@@ -47,7 +46,6 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
   }
   
   override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator!) {
-    println("will transition to size")
     view.layoutSubviews()
   }
   

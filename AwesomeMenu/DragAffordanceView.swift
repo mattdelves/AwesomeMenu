@@ -1,6 +1,5 @@
 //
 //  DragAffordanceView.swift
-//  PullToMenu
 //
 //  Created by Matthew Delves on 26/07/2014.
 //  Copyright (c) 2014 Matthew Delves. All rights reserved.
