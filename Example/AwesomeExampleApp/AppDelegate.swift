@@ -14,12 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  
   func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
     // Override point for customization after application launch.
     let container:ContainerViewController = window?.rootViewController as ContainerViewController
+    
+    let overlayView = UIView(frame: container.view.bounds)
+    let imageView = UIImageView(image: UIImage(named: "lego"))
+    imageView.contentMode = .ScaleAspectFill
+    overlayView.addSubview(imageView)
+    overlayView.alpha = 0.0
+
     container.menuViewController = RedTeamViewController()
     container.visibleViewController = BlueTeamViewController()
+    container.overlayView = overlayView
     
     return true
   }
