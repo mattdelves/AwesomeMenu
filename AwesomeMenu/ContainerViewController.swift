@@ -9,6 +9,7 @@ import UIKit
 
 public class ContainerViewController: UIViewController, UIScrollViewDelegate {
   
+  public var visibleNavigationController:UINavigationController!
   public var visibleViewController:UIViewController!
   public var menuViewController:UIViewController!
   public var overlayView:UIView!
@@ -37,7 +38,7 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
     menuViewController!.transitioningDelegate = menuTransitioningDelegate
     menuViewController!.modalPresentationStyle = .Custom
     
-    enclosingScrollView!.addSubview(visibleViewController!.view)
+    enclosingScrollView!.addSubview(visibleNavigationController.view)
   }
   
   override public func didReceiveMemoryWarning() {
@@ -49,6 +50,18 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
     view.layoutSubviews()
   }
   
+  public func displayViewControllerAsPrimary(viewController: UIViewController, inNavigation: Bool = false) {
+    if inNavigation {
+      visibleNavigationController.viewControllers = [viewController]
+    }
+  }
+
+  public func displayTableViewControllerAsPrimary(tableViewController: UITableViewController, inNavigation: Bool = false) {
+    if inNavigation {
+      visibleNavigationController.viewControllers = [tableViewController]
+    }
+  }
+
   // MARK: - ScrollView Delegate methods
   public func scrollViewDidScroll(scrollView: UIScrollView!) {
     if (scrollView.dragging) {
