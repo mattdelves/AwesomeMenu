@@ -9,20 +9,20 @@
 import UIKit
 
 class OverlayDismissTransition: NSObject, UIViewControllerAnimatedTransitioning {
-  func transitionDuration(transitionContext: UIViewControllerContextTransitioning!) -> NSTimeInterval {
+  func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
     return 0.5
   }
   
-  func animateTransition(transitionContext: UIViewControllerContextTransitioning!) {
+  func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
     let fromVC   = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-    let fromView = fromVC.view
+    let fromView = fromVC?.view
     
     let containerView = transitionContext.containerView()
     
     let animatingVC   = fromVC
     let animatingView = fromView
     
-    var appearedFrame = transitionContext.finalFrameForViewController(animatingVC)
+    var appearedFrame = transitionContext.finalFrameForViewController(animatingVC!)
     var dismissedFrame = appearedFrame
     
     dismissedFrame.origin.x += dismissedFrame.size.width
@@ -30,8 +30,8 @@ class OverlayDismissTransition: NSObject, UIViewControllerAnimatedTransitioning 
     var initialFrame = appearedFrame
     var finalFrame = dismissedFrame
     
-    animatingView.frame = initialFrame
-    
+    animatingView?.frame = initialFrame
+
     UIView.animateWithDuration(
       self.transitionDuration(transitionContext),
       delay: 0,
@@ -39,12 +39,12 @@ class OverlayDismissTransition: NSObject, UIViewControllerAnimatedTransitioning 
       initialSpringVelocity: 5,
       options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
       animations: {
-        animatingView.frame = finalFrame
+        animatingView!.frame = finalFrame
       },
       completion: { finished in
-        fromView.removeFromSuperview()
+        fromView?.removeFromSuperview()
         transitionContext.completeTransition(true)
-      })
+      }
+    )
   }
-  
 }

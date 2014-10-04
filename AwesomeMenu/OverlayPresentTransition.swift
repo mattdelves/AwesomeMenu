@@ -9,25 +9,25 @@
 import UIKit
 
 class OverlayPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
-  func transitionDuration(transitionContext: UIViewControllerContextTransitioning!) -> NSTimeInterval {
+  func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
     return 0.5
   }
   
-  func animateTransition(transitionContext: UIViewControllerContextTransitioning!)  {
+  func animateTransition(transitionContext: UIViewControllerContextTransitioning)  {
     let fromVC   = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-    let fromView = fromVC.view
+    let fromView = fromVC?.view
     
     let toVC   = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-    let toView = toVC.view
+    let toView = toVC?.view
     
     let containerView = transitionContext.containerView()
     
-    containerView.addSubview(toView)
+    containerView.addSubview(toView!)
     
     let animatingVC   = toVC
     let animatingView = toView
     
-    var appearedFrame = transitionContext.finalFrameForViewController(animatingVC)
+    var appearedFrame = transitionContext.finalFrameForViewController(animatingVC!)
     var dismissedFrame = appearedFrame
     
     dismissedFrame.origin.x += dismissedFrame.size.width
@@ -35,7 +35,7 @@ class OverlayPresentTransition: NSObject, UIViewControllerAnimatedTransitioning 
     var initialFrame = dismissedFrame
     var finalFrame = appearedFrame
     
-    animatingView.frame = initialFrame
+    animatingView!.frame = initialFrame
     
     UIView.animateWithDuration(
       self.transitionDuration(transitionContext),
@@ -44,7 +44,7 @@ class OverlayPresentTransition: NSObject, UIViewControllerAnimatedTransitioning 
       initialSpringVelocity: 5,
       options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
       animations: {
-        animatingView.frame = finalFrame
+        animatingView!.frame = finalFrame
       },
       completion: { finished in
         transitionContext.completeTransition(true)

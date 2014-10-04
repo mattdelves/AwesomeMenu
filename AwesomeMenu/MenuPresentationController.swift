@@ -38,7 +38,7 @@ class MenuPresentationController: UIPresentationController {
     }
   }
   
-  override func sizeForChildContentContainer(container: UIContentContainer!, withParentContainerSize parentSize: CGSize) -> CGSize
+  override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize
   {
     return CGSizeMake(parentSize.width / 3.0, parentSize.height)
   }

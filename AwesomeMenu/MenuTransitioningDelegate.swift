@@ -13,7 +13,7 @@ class MenuTransitioningDelegate: NSObject,  UIViewControllerTransitioningDelegat
   
   internal func presentationControllerForPresentedViewController(presented: UIViewController!, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController!) -> UIPresentationController! {
     let presentationController = MenuPresentationController(presentedViewController: presented, presentingViewController: presenting)
-    presentationController.overlay = overlay
+    presentationController?.overlay = overlay
     return presentationController
   }
 

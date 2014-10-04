@@ -12,8 +12,8 @@ class SpringExpandView: UIView {
   var stretchingView:UIView?
   var expanded:Bool?
 
-  required init(coder aDecoder: NSCoder!) {
-    super.init(coder: aDecoder!)
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
   }
   
   override init(frame: CGRect) {

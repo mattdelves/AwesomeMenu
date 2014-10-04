@@ -46,7 +46,7 @@ public class ContainerViewController: UIViewController, UIScrollViewDelegate {
     // Dispose of any resources that can be recreated.
   }
   
-  override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator!) {
+  override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
     view.layoutSubviews()
   }
   
